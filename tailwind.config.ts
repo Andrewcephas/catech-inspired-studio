@@ -62,10 +62,6 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
-      backgroundImage: {
-        'hero-gradient': 'var(--hero-gradient)',
-        'gradient-subtle': 'var(--gradient-subtle)',
-      },
       boxShadow: {
         'soft': 'var(--shadow-soft)',
         'medium': 'var(--shadow-medium)',
