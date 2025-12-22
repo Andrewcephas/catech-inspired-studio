@@ -15,10 +15,7 @@ const Mission = () => {
             </div>
             <div className="bg-card border border-border rounded-lg p-6 shadow-soft hover:shadow-medium transition-shadow duration-300">
               <p className="text-card-foreground text-base leading-relaxed">
-                Catech Solutions & Graphics provides creative and technical solutions that 
-                transform brands through Web Design, Graphic Design, and Brand Identity. 
-                Our aim is to empower businesses by helping them stand out with compelling 
-                digital and graphic designs that drive growth and success.
+                To deliver innovative digital and creative solutions that help businesses grow and stand out in a competitive market.
               </p>
             </div>
           </div>
@@ -33,10 +30,7 @@ const Mission = () => {
             </div>
             <div className="bg-card border border-border rounded-lg p-6 shadow-soft hover:shadow-medium transition-shadow duration-300">
               <p className="text-card-foreground text-base leading-relaxed">
-                To be the leading creative and technical solutions provider in East Africa, 
-                recognized for innovation, quality, and our commitment to transforming 
-                businesses through cutting-edge design and technology. We envision a future 
-                where every business, regardless of size, has access to world-class digital solutions.
+                To be the leading creative solutions provider in East Africa, recognized for quality and innovation.
               </p>
             </div>
           </div>

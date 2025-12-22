@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import catechLogo from "@/assets/catech-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,8 +11,7 @@ const Navbar = () => {
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
     { name: "About", href: "#about" },
-    { name: "Projects", href: "#gallery" },
-    { name: "Blogs", href: "#blogs" },
+    { name: "Projects", href: "#projects" },
     { name: "Testimonials", href: "#testimonials" },
   ];
 
@@ -22,10 +22,7 @@ const Navbar = () => {
         <div className="bg-primary rounded-full px-6 py-3 flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-              <span className="text-primary font-bold text-sm">O</span>
-            </div>
-            <span className="text-xl font-semibold text-white">Olivia.</span>
+            <img src={catechLogo} alt="Catech Logo" className="h-10 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -47,11 +44,13 @@ const Navbar = () => {
           </div>
 
           {/* Contact Button */}
-          <Button
-            className="hidden md:flex bg-white text-primary hover:bg-white/90 rounded-full px-6 font-medium"
-          >
-            Contact Me
-          </Button>
+          <a href="#contact">
+            <Button
+              className="hidden md:flex bg-white text-primary hover:bg-white/90 rounded-full px-6 font-medium"
+            >
+              Contact Us
+            </Button>
+          </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -83,9 +82,11 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button className="w-full mt-4 bg-white text-primary hover:bg-white/90 rounded-full">
-              Contact Me
-            </Button>
+            <a href="#contact">
+              <Button className="w-full mt-4 bg-white text-primary hover:bg-white/90 rounded-full">
+                Contact Us
+              </Button>
+            </a>
           </div>
         )}
       </div>
