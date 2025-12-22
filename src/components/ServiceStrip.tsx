@@ -1,24 +1,23 @@
-import { ChevronLeft } from "lucide-react";
+const services = [
+  "App Design",
+  "Website Design",
+  "Branding",
+  "Graphics",
+  "Digital Marketing",
+  "UI/UX Design",
+];
 
 const ServiceStrip = () => {
-  const services = [
-    "App Design",
-    "Website Design",
-    "Dashboard",
-    "Wireframing",
-  ];
-
   return (
-    <div className="w-full bg-accent py-4 overflow-hidden">
-      <div className="flex items-center justify-center gap-8 md:gap-16 px-4">
-        <ChevronLeft className="w-6 h-6 text-primary flex-shrink-0" />
+    <div className="bg-accent py-4 overflow-hidden">
+      <div className="flex items-center justify-center flex-wrap gap-4 md:gap-8 px-4">
         {services.map((service, index) => (
-          <div key={service} className="flex items-center gap-8 md:gap-16">
-            <span className="text-primary font-bold text-lg md:text-2xl whitespace-nowrap">
+          <div key={index} className="flex items-center gap-4 md:gap-8">
+            <span className="text-primary font-bold text-sm md:text-base whitespace-nowrap">
               {service}
             </span>
             {index < services.length - 1 && (
-              <span className="text-primary text-2xl md:text-3xl font-bold">✱</span>
+              <span className="text-primary text-lg">✱</span>
             )}
           </div>
         ))}

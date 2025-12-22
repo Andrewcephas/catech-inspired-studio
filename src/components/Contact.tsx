@@ -1,10 +1,71 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { useState } from "react";
+import { Phone, Mail, MapPin, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").max(100),
+  email: z.string().email("Invalid email address").max(255),
+  phone: z.string().max(20).optional(),
+  message: z.string().min(10, "Message must be at least 10 characters").max(1000),
+});
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const validated = contactSchema.parse(formData);
+      
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: validated.name,
+        email: validated.email,
+        phone: validated.phone || null,
+        message: validated.message,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you as soon as possible.",
+      });
+      
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation error",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to send message. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-16 bg-secondary/30">
       <div className="container mx-auto px-4">
@@ -66,7 +127,7 @@ const Contact = () => {
           {/* Contact Form */}
           <Card className="border shadow-medium">
             <CardContent className="p-6">
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-1.5">
                     Your Name
@@ -74,6 +135,9 @@ const Contact = () => {
                   <Input
                     id="name"
                     placeholder="John Doe"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
                     className="w-full"
                   />
                 </div>
@@ -86,6 +150,9 @@ const Contact = () => {
                     id="email"
                     type="email"
                     placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
                     className="w-full"
                   />
                 </div>
@@ -98,6 +165,8 @@ const Contact = () => {
                     id="phone"
                     type="tel"
                     placeholder="+254 700 000 000"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full"
                   />
                 </div>
@@ -109,15 +178,26 @@ const Contact = () => {
                   <Textarea
                     id="message"
                     placeholder="Tell us about your project..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    required
                     className="w-full min-h-[100px]"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
+                  disabled={isSubmitting}
                   className="w-full bg-accent hover:bg-accent/90 text-accent-foreground shadow-soft"
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
                 </Button>
               </form>
             </CardContent>
