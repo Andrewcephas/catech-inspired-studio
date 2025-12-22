@@ -5,10 +5,10 @@ import heroPerson from "@/assets/hero-person.png";
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center pt-24 pb-8 bg-background overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div className="w-full px-4 lg:container lg:mx-auto">
+        <div className="flex flex-col lg:flex-row items-center lg:items-center gap-8">
           {/* Left Column - Text */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:flex-1">
             {/* Badge */}
             <div className="inline-block px-4 py-2 bg-background border border-border rounded-sm shadow-sm">
               <p className="text-sm text-foreground font-medium">Creative Solutions</p>
@@ -51,7 +51,7 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Image */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div className="relative flex justify-center lg:justify-end lg:flex-1">
             {/* Orange Circle Background */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 w-72 h-72 md:w-80 md:h-80 bg-accent rounded-full"></div>
 

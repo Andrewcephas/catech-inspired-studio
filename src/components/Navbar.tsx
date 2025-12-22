@@ -22,7 +22,9 @@ const Navbar = () => {
         <div className="bg-primary rounded-full px-6 py-3 flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center space-x-2">
-            <img src={catechLogo} alt="Catech Logo" className="h-10 w-auto" />
+            <div className="bg-white rounded-full p-1">
+              <img src={catechLogo} alt="Catech Logo" className="h-10 w-auto" />
+            </div>
           </a>
 
           {/* Desktop Navigation */}
