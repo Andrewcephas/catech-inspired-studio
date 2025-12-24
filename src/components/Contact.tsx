@@ -91,7 +91,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-base mb-1">Phone / WhatsApp</h3>
-                  <p className="text-sm text-muted-foreground">+254 792 614 592</p>
+                  <p className="text-sm text-muted-foreground">0793 614 592</p>
                   <p className="text-xs text-muted-foreground">Available Mon-Fri, 8AM-6PM</p>
                 </div>
               </CardContent>
@@ -104,7 +104,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-base mb-1">Email</h3>
-                  <p className="text-sm text-muted-foreground">info@catech.co.ke</p>
+                  <p className="text-sm text-muted-foreground">catechsolutionsgraphics@gmail.com</p>
                   <p className="text-xs text-muted-foreground">We'll respond within 24 hours</p>
                 </div>
               </CardContent>
@@ -134,7 +134,7 @@ const Contact = () => {
                   </label>
                   <Input
                     id="name"
-                    placeholder="John Doe"
+                    placeholder="Andrew Ngumbau"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required

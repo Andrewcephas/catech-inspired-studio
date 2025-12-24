@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroPerson from "@/assets/hero-person.png";
 
@@ -32,17 +32,19 @@ const Hero = () => {
               <a href="#projects">
                 <Button
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6"
+                  className="bg-accent hover:bg-accent/90 text-primary rounded-full px-6 shadow-md"
                 >
-                  View Our Work
-                  <ArrowRight className="ml-2 w-4 h-4" />
+                  View My Portfolio
+                  <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center ml-2">
+                    <Play className="w-3 h-3 text-accent fill-accent" />
+                  </div>
                 </Button>
               </a>
               <a href="#contact">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-8"
+                  className="border-2 border-accent text-primary hover:bg-accent hover:text-primary rounded-full px-8"
                 >
                   Get Quote
                 </Button>

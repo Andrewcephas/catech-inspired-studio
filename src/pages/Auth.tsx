@@ -23,33 +23,31 @@ const Auth = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
+    const checkAdminAndRedirect = (userId: string) => {
+      setTimeout(async () => {
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", userId);
+        
+        if (roles && roles.some((r) => r.role === "admin")) {
+          navigate("/admin");
+        }
+      }, 0);
+    };
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         if (session?.user) {
-          // Check if user is admin
-          const { data: roles } = await supabase
-            .from("user_roles")
-            .select("role")
-            .eq("user_id", session.user.id);
-          
-          if (roles && roles.some((r) => r.role === "admin")) {
-            navigate("/admin");
-          }
+          checkAdminAndRedirect(session.user.id);
         }
       }
     );
 
     // Check existing session
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        const { data: roles } = await supabase
-          .from("user_roles")
-          .select("role")
-          .eq("user_id", session.user.id);
-        
-        if (roles && roles.some((r) => r.role === "admin")) {
-          navigate("/admin");
-        }
+        checkAdminAndRedirect(session.user.id);
       }
     });
 
