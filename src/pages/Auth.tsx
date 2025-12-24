@@ -23,23 +23,48 @@ const Auth = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    const checkAdminAndRedirect = (userId: string) => {
-      setTimeout(async () => {
-        const { data: roles } = await supabase
+    const checkAdminAndRedirect = async (userId: string) => {
+      try {
+        const { data: roles, error } = await supabase
           .from("user_roles")
           .select("role")
           .eq("user_id", userId);
         
-        if (roles && roles.some((r) => r.role === "admin")) {
-          navigate("/admin");
+        if (error) {
+          console.error("Error checking roles:", error);
+          toast({
+            title: "Error",
+            description: "Failed to verify admin access",
+            variant: "destructive",
+          });
+          return;
         }
-      }, 0);
+        
+        if (roles && roles.some((r) => r.role === "admin")) {
+          toast({
+            title: "Welcome back!",
+            description: "Redirecting to admin dashboard...",
+          });
+          navigate("/admin");
+        } else {
+          toast({
+            title: "Access Denied",
+            description: "You don't have admin privileges. Contact the administrator.",
+            variant: "destructive",
+          });
+          await supabase.auth.signOut();
+        }
+      } catch (err) {
+        console.error("Admin check error:", err);
+      }
     };
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        if (session?.user) {
-          checkAdminAndRedirect(session.user.id);
+        if (event === 'SIGNED_IN' && session?.user) {
+          setTimeout(() => {
+            checkAdminAndRedirect(session.user.id);
+          }, 0);
         }
       }
     );
@@ -52,7 +77,7 @@ const Auth = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, toast]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,6 +92,7 @@ const Auth = () => {
           password,
         });
         if (error) throw error;
+        // Toast will be shown in onAuthStateChange after role check
       } else {
         const { error } = await supabase.auth.signUp({
           email,

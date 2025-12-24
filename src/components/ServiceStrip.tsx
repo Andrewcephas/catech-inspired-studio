@@ -12,12 +12,13 @@ const ServiceStrip = () => {
     <>
       <style>
         {`
-          @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+          @keyframes scrollBg {
+            0% { background-position: 0 0; }
+            100% { background-position: -200% 0; }
           }
-          .animate-scroll {
-            animation: scroll 25s linear infinite;
+          .animate-bg-scroll {
+            background-size: 200% 100%;
+            animation: scrollBg 15s linear infinite;
           }
         `}
       </style>
@@ -27,15 +28,20 @@ const ServiceStrip = () => {
           className="relative py-4 overflow-hidden"
           style={{ transform: 'rotate(-2deg) scale(1.05)' }}
         >
-          {/* Main yellow strip */}
-          <div className="bg-accent py-4 shadow-lg">
-            <div className="flex animate-scroll">
-              {[...services, ...services, ...services, ...services].map((service, index) => (
-                <div key={index} className="flex items-center gap-6 md:gap-10 px-6 md:px-8">
-                  <span className="text-primary font-bold text-base md:text-lg whitespace-nowrap tracking-wide">
+          {/* Main yellow strip with animated gradient background */}
+          <div 
+            className="py-4 shadow-lg animate-bg-scroll"
+            style={{
+              background: 'linear-gradient(90deg, hsl(36 100% 50%) 0%, hsl(45 100% 55%) 25%, hsl(36 100% 50%) 50%, hsl(45 100% 55%) 75%, hsl(36 100% 50%) 100%)',
+            }}
+          >
+            <div className="flex justify-around items-center px-4">
+              {services.map((service, index) => (
+                <div key={index} className="flex items-center gap-6 md:gap-10 px-4 md:px-8">
+                  <span className="text-primary font-bold text-sm md:text-lg whitespace-nowrap tracking-wide">
                     {service}
                   </span>
-                  <span className="text-primary text-xl font-bold">✳</span>
+                  <span className="text-primary text-lg font-bold">✳</span>
                 </div>
               ))}
             </div>
