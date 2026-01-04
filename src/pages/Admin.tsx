@@ -9,7 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { LogOut, Plus, Pencil, Trash2, Folder, MessageSquare, Mail, Loader2 } from "lucide-react";
+import { LogOut, Plus, Pencil, Trash2, Folder, MessageSquare, Mail, Loader2, Upload, Image } from "lucide-react";
+import { Label } from "@/components/ui/label";
 import catechLogo from "@/assets/catech-logo.png";
 import type { Session, User } from "@supabase/supabase-js";
 
@@ -61,6 +62,35 @@ const Admin = () => {
     image_url: "",
     tags: "",
   });
+  const [imageUploading, setImageUploading] = useState(false);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImageUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('project-images')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(fileName);
+
+      setProjectForm({ ...projectForm, image_url: publicUrl });
+      toast({ title: "Image uploaded successfully" });
+    } catch (error) {
+      toast({ title: "Failed to upload image", variant: "destructive" });
+    } finally {
+      setImageUploading(false);
+    }
+  };
 
   // Testimonial dialog state
   const [testimonialDialogOpen, setTestimonialDialogOpen] = useState(false);
@@ -437,11 +467,44 @@ const Admin = () => {
                       value={projectForm.category}
                       onChange={(e) => setProjectForm({ ...projectForm, category: e.target.value })}
                     />
-                    <Input
-                      placeholder="Image URL"
-                      value={projectForm.image_url}
-                      onChange={(e) => setProjectForm({ ...projectForm, image_url: e.target.value })}
-                    />
+                    <div className="space-y-2">
+                      <Label>Project Image</Label>
+                      <div className="flex gap-2">
+                        <Input
+                          placeholder="Image URL"
+                          value={projectForm.image_url}
+                          onChange={(e) => setProjectForm({ ...projectForm, image_url: e.target.value })}
+                          className="flex-1"
+                        />
+                        <Label 
+                          htmlFor="image-upload" 
+                          className="cursor-pointer inline-flex items-center justify-center px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors"
+                        >
+                          {imageUploading ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <Upload className="w-4 h-4" />
+                          )}
+                        </Label>
+                        <input
+                          id="image-upload"
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleImageUpload}
+                          disabled={imageUploading}
+                        />
+                      </div>
+                      {projectForm.image_url && (
+                        <div className="mt-2 relative w-full h-32 rounded-lg overflow-hidden border border-border">
+                          <img 
+                            src={projectForm.image_url} 
+                            alt="Preview" 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                    </div>
                     <Input
                       placeholder="Tags (comma-separated)"
                       value={projectForm.tags}

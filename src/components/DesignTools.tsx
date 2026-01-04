@@ -1,19 +1,40 @@
-import { 
-  Figma, 
-  Palette, 
-  Layers, 
-  Film, 
-  PenTool, 
-  Layout 
-} from "lucide-react";
-
 const tools = [
-  { name: "Figma", percentage: 98, Icon: Figma, color: "bg-purple-500" },
-  { name: "Sketch", percentage: 92, Icon: Layers, color: "bg-amber-500" },
-  { name: "Photoshop", percentage: 90, Icon: Palette, color: "bg-blue-600" },
-  { name: "After Effects", percentage: 85, Icon: Film, color: "bg-violet-600" },
-  { name: "Illustrator", percentage: 90, Icon: PenTool, color: "bg-orange-500" },
-  { name: "InVision", percentage: 95, Icon: Layout, color: "bg-pink-500" },
+  { 
+    name: "Figma", 
+    percentage: 98, 
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    color: "bg-[#1E1E1E]" 
+  },
+  { 
+    name: "Sketch", 
+    percentage: 92, 
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg",
+    color: "bg-[#F7B500]" 
+  },
+  { 
+    name: "Photoshop", 
+    percentage: 90, 
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg",
+    color: "bg-[#31A8FF]" 
+  },
+  { 
+    name: "After Effects", 
+    percentage: 85, 
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg",
+    color: "bg-[#9999FF]" 
+  },
+  { 
+    name: "Illustrator", 
+    percentage: 90, 
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg",
+    color: "bg-[#FF9A00]" 
+  },
+  { 
+    name: "XD", 
+    percentage: 95, 
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-original.svg",
+    color: "bg-[#FF61F6]" 
+  },
 ];
 
 const DesignTools = () => {
@@ -32,7 +53,6 @@ const DesignTools = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {tools.map((tool, index) => {
-            const Icon = tool.Icon;
             const circumference = 2 * Math.PI * 40;
             const strokeDashoffset = circumference - (tool.percentage / 100) * circumference;
             
@@ -41,7 +61,7 @@ const DesignTools = () => {
                 key={index} 
                 className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border hover:border-primary/30 hover:shadow-medium transition-all duration-300"
               >
-                {/* Circular Progress with Icon */}
+                {/* Circular Progress with Logo */}
                 <div className="relative w-24 h-24">
                   <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
                     {/* Background circle */}
@@ -71,10 +91,14 @@ const DesignTools = () => {
                       }}
                     />
                   </svg>
-                  {/* Icon in center */}
-                  <div className={`absolute inset-0 flex items-center justify-center`}>
-                    <div className={`w-12 h-12 rounded-full ${tool.color} flex items-center justify-center`}>
-                      <Icon className="w-6 h-6 text-white" />
+                  {/* Logo in center */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className={`w-12 h-12 rounded-full ${tool.color} flex items-center justify-center p-2`}>
+                      <img 
+                        src={tool.logo} 
+                        alt={tool.name} 
+                        className="w-8 h-8 object-contain"
+                      />
                     </div>
                   </div>
                 </div>
