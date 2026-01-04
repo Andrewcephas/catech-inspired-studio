@@ -107,7 +107,19 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent layout shift on hover */
+  img, button, a, div {
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }

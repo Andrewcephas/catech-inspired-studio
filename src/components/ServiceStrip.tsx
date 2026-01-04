@@ -1,45 +1,52 @@
 const services = [
-  "App Design",
-  "Website Design",
-  "Dashboard",
-  "Wireframe",
-  "Branding",
-  "UI/UX Design",
+  { name: "App Design", logo: "📱" },
+  { name: "Website Design", logo: "🌐" },
+  { name: "Dashboard", logo: "📊" },
+  { name: "Wireframe", logo: "📐" },
+  { name: "Branding", logo: "🎨" },
+  { name: "UI/UX Design", logo: "✨" },
 ];
 
 const ServiceStrip = () => {
+  // Duplicate services for seamless infinite scroll
+  const duplicatedServices = [...services, ...services, ...services, ...services];
+
   return (
     <>
       <style>
         {`
-          @keyframes scrollBg {
-            0% { background-position: 0 0; }
-            100% { background-position: -200% 0; }
+          @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
           }
-          .animate-bg-scroll {
-            background-size: 200% 100%;
-            animation: scrollBg 15s linear infinite;
+          .animate-scroll-text {
+            animation: scrollText 20s linear infinite;
+          }
+          .animate-scroll-text:hover {
+            animation-play-state: paused;
           }
         `}
       </style>
-      <div className="relative -mt-6 z-20">
-        {/* Diagonal strip container */}
+      <div className="relative z-20 container mx-auto px-4">
+        {/* Strip aligned with navbar width */}
         <div 
-          className="relative py-4 overflow-hidden"
-          style={{ transform: 'rotate(-2deg) scale(1.05)' }}
+          className="relative py-2 overflow-hidden"
+          style={{ transform: 'rotate(-2deg)' }}
         >
-          {/* Main yellow strip with animated gradient background */}
+          {/* Main yellow strip */}
           <div 
-            className="py-4 shadow-lg animate-bg-scroll"
+            className="py-4 shadow-lg overflow-hidden"
             style={{
-              background: 'linear-gradient(90deg, hsl(36 100% 50%) 0%, hsl(45 100% 55%) 25%, hsl(36 100% 50%) 50%, hsl(45 100% 55%) 75%, hsl(36 100% 50%) 100%)',
+              background: 'linear-gradient(90deg, hsl(36 100% 50%) 0%, hsl(45 100% 55%) 50%, hsl(36 100% 50%) 100%)',
             }}
           >
-            <div className="flex justify-around items-center px-4">
-              {services.map((service, index) => (
-                <div key={index} className="flex items-center gap-6 md:gap-10 px-4 md:px-8">
-                  <span className="text-primary font-bold text-sm md:text-lg whitespace-nowrap tracking-wide">
-                    {service}
+            {/* Scrolling text container */}
+            <div className="flex animate-scroll-text" style={{ width: 'max-content' }}>
+              {duplicatedServices.map((service, index) => (
+                <div key={index} className="flex items-center gap-4 px-6">
+                  <span className="text-2xl">{service.logo}</span>
+                  <span className="text-primary font-bold text-sm md:text-base whitespace-nowrap tracking-wide">
+                    {service.name}
                   </span>
                   <span className="text-primary text-lg font-bold">✳</span>
                 </div>
