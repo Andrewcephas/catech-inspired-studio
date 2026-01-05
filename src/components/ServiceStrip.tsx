@@ -35,10 +35,7 @@ const ServiceStrip = () => {
         >
           {/* Main yellow strip */}
           <div 
-            className="py-4 shadow-lg overflow-hidden"
-            style={{
-              background: 'linear-gradient(90deg, hsl(36 100% 50%) 0%, hsl(45 100% 55%) 50%, hsl(36 100% 50%) 100%)',
-            }}
+            className="py-4 shadow-lg overflow-hidden bg-accent"
           >
             {/* Scrolling text container */}
             <div className="flex animate-scroll-text" style={{ width: 'max-content' }}>
