@@ -54,16 +54,18 @@ const Hero = () => {
 
           {/* Right Column - Image */}
           <div className="relative flex justify-center lg:justify-end lg:flex-1">
-            {/* Orange Circle Background */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-72 h-72 md:w-80 md:h-80 bg-accent rounded-full"></div>
+            {/* Orange Circle Background with Stroke */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-72 h-72 md:w-80 md:h-80 bg-accent rounded-full border-4 border-primary/30 shadow-lg"></div>
 
-            {/* Main Image */}
+            {/* Main Image - Masked to Circle */}
             <div className="relative z-10">
-              <img
-                src={heroPerson}
-                alt="Catech Solutions - Professional working"
-                className="w-72 md:w-80 lg:w-96 h-auto object-cover relative z-10 rounded-2xl"
-              />
+              <div className="w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
+                <img
+                  src={heroPerson}
+                  alt="Catech Solutions - Professional working"
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
               {/* Floating Labels */}
               <div className="absolute top-1/4 -right-2 md:right-0 bg-accent text-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-lg z-20">
