@@ -2,11 +2,24 @@ import { Play, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import heroPerson from "@/assets/hero-person.png";
+import officeBg from "@/assets/office-bg.jpg";
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center pt-24 pb-8 bg-background overflow-hidden">
-      <div className="w-full px-4 lg:container lg:mx-auto">
+    <section id="home" className="min-h-screen flex items-center pt-24 pb-8 overflow-hidden relative">
+      {/* Office Background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${officeBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.15,
+        }}
+      />
+      <div className="absolute inset-0 bg-background/80 z-0" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center lg:items-center gap-8">
           {/* Left Column - Text */}
           <div className="space-y-6 lg:flex-1">
@@ -20,17 +33,17 @@ const Hero = () => {
               <p className="text-sm text-foreground font-medium">Creative Solutions</p>
             </motion.div>
 
-            {/* Main Heading - Consistent width across breakpoints */}
+            {/* Main Heading - Welcome to on first line, rest on second */}
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight text-foreground max-w-[280px] sm:max-w-[340px] md:max-w-[420px] lg:max-w-[500px]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight text-foreground"
             >
-              Welcome to{" "}
+              <span className="block">Welcome to</span>
               <span className="text-accent">Catech</span>
               <br />
-              Solutions & Graphics
+              <span>Solutions & Graphics</span>
             </motion.h1>
 
             {/* Supporting Text */}
@@ -79,45 +92,44 @@ const Hero = () => {
 
           {/* Right Column - Image */}
           <div className="relative flex justify-center lg:justify-end lg:flex-1">
-            {/* Decorative Shape Behind - Hexagon-like pattern */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="absolute right-4 md:right-0 top-1/2 -translate-y-1/2 w-80 h-80 md:w-96 md:h-96"
-            >
-              {/* Outer decorative ring */}
-              <div className="absolute inset-0 rounded-full border-[3px] border-dashed border-primary/30 animate-spin-slow"></div>
-              {/* Inner accent circle */}
-              <div className="absolute inset-4 rounded-full bg-accent/20 border-4 border-accent"></div>
-              {/* Decorative dots */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary"></div>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary"></div>
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-accent"></div>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-accent"></div>
-            </motion.div>
-
-            {/* Main Image - Masked to Circle */}
+            {/* Decorative Shape Behind */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="relative z-10"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative w-72 h-72 md:w-80 md:h-80 lg:w-[340px] lg:h-[340px]"
             >
-              <div className="w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-[6px] border-primary shadow-2xl">
+              {/* Outer accent ring with stroke */}
+              <div className="absolute inset-0 rounded-full border-[4px] border-accent" />
+              
+              {/* Inner decorative dashed ring - rotating */}
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-3 rounded-full border-[2px] border-dashed border-primary/40"
+              />
+              
+              {/* Main image container - clipped inside the shape */}
+              <div className="absolute inset-4 rounded-full overflow-hidden border-[5px] border-primary shadow-2xl">
                 <img
                   src={heroPerson}
                   alt="Catech Solutions - Professional working"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
 
-              {/* Floating Labels - Positioned outside the circle */}
+              {/* Corner accent dots */}
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent" />
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent" />
+              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
+
+              {/* Floating Labels - Outside the stroke */}
               <motion.div 
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="absolute top-4 -right-16 md:-right-24 bg-accent text-primary px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
+                className="absolute -top-4 -right-20 md:-right-24 bg-accent text-primary px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
               >
                 Web Design
               </motion.div>
@@ -126,7 +138,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className="absolute bottom-4 -left-16 md:-left-20 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
+                className="absolute bottom-8 -left-24 md:-left-28 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
               >
                 Graphic Design
               </motion.div>
@@ -135,7 +147,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
-                className="absolute -bottom-4 right-8 md:right-4 bg-background border-2 border-primary text-primary px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
+                className="absolute -bottom-8 right-4 bg-background border-2 border-primary text-primary px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
               >
                 Branding
               </motion.div>
@@ -144,17 +156,35 @@ const Hero = () => {
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.9 }}
-                className="absolute top-1/2 -right-20 md:-right-28 bg-accent/90 text-primary px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
+                className="absolute top-1/3 -right-20 md:-right-24 bg-accent/90 text-primary px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
               >
                 UI/UX
               </motion.div>
 
-              {/* Badge */}
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.0 }}
+                className="absolute top-1/4 -left-20 md:-left-24 bg-primary/90 text-primary-foreground px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20"
+              >
+                Logo Design
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.1 }}
+                className="absolute -bottom-4 -left-12 bg-accent text-primary px-3 py-1.5 rounded-full text-xs font-bold shadow-lg z-20"
+              >
+                Marketing
+              </motion.div>
+
+              {/* Rotating Badge */}
               <motion.div 
                 initial={{ opacity: 0, rotate: -180 }}
                 animate={{ opacity: 1, rotate: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute top-8 right-0 md:-right-4 w-20 h-20 z-20"
+                className="absolute -top-2 -right-2 w-20 h-20 z-20"
               >
                 <div className="relative w-full h-full">
                   <div className="absolute inset-0 rounded-full border-2 border-primary flex items-center justify-center bg-background">

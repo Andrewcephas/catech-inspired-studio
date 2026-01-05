@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const tools = [
   { 
     name: "Figma", 
@@ -41,7 +43,13 @@ const DesignTools = () => {
   return (
     <section id="tools" className="py-16 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
           <div className="inline-block mb-3 px-4 py-1.5 bg-primary/10 rounded border border-primary/20">
             <p className="text-primary font-medium text-xs uppercase tracking-wide">Our Toolkit</p>
           </div>
@@ -49,7 +57,7 @@ const DesignTools = () => {
             <span className="text-accent italic">Exploring the Tools</span>
           </h2>
           <p className="text-xl font-bold text-foreground">Behind Our Designs</p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {tools.map((tool, index) => {
@@ -57,8 +65,12 @@ const DesignTools = () => {
             const strokeDashoffset = circumference - (tool.percentage / 100) * circumference;
             
             return (
-              <div 
-                key={index} 
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
                 className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border hover:border-primary/30 hover:shadow-medium transition-all duration-300"
               >
                 {/* Circular Progress with Logo */}
@@ -108,7 +120,7 @@ const DesignTools = () => {
                 
                 {/* Tool name */}
                 <span className="text-sm font-medium text-muted-foreground">{tool.name}</span>
-              </div>
+              </motion.div>
             );
           })}
         </div>
