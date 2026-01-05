@@ -63,6 +63,7 @@ const Admin = () => {
     tags: "",
   });
   const [imageUploading, setImageUploading] = useState(false);
+  const [avatarUploading, setAvatarUploading] = useState(false);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -89,6 +90,34 @@ const Admin = () => {
       toast({ title: "Failed to upload image", variant: "destructive" });
     } finally {
       setImageUploading(false);
+    }
+  };
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setAvatarUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `avatar-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('project-images')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(fileName);
+
+      setTestimonialForm({ ...testimonialForm, avatar_url: publicUrl });
+      toast({ title: "Avatar uploaded successfully" });
+    } catch (error) {
+      toast({ title: "Failed to upload avatar", variant: "destructive" });
+    } finally {
+      setAvatarUploading(false);
     }
   };
 
@@ -610,11 +639,45 @@ const Admin = () => {
                       onChange={(e) => setTestimonialForm({ ...testimonialForm, content: e.target.value })}
                       required
                     />
-                    <Input
-                      placeholder="Avatar URL"
-                      value={testimonialForm.avatar_url}
-                      onChange={(e) => setTestimonialForm({ ...testimonialForm, avatar_url: e.target.value })}
-                    />
+                    <div className="space-y-2">
+                      <Label>Client Avatar</Label>
+                      <div className="flex gap-2">
+                        <Input
+                          placeholder="Avatar URL"
+                          value={testimonialForm.avatar_url}
+                          onChange={(e) => setTestimonialForm({ ...testimonialForm, avatar_url: e.target.value })}
+                          className="flex-1"
+                        />
+                        <Label 
+                          htmlFor="avatar-upload" 
+                          className="cursor-pointer inline-flex items-center justify-center px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors"
+                        >
+                          {avatarUploading ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <Upload className="w-4 h-4" />
+                          )}
+                        </Label>
+                        <input
+                          id="avatar-upload"
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleAvatarUpload}
+                          disabled={avatarUploading}
+                        />
+                      </div>
+                      {testimonialForm.avatar_url && (
+                        <div className="mt-2 flex items-center gap-2">
+                          <img 
+                            src={testimonialForm.avatar_url} 
+                            alt="Avatar Preview" 
+                            className="w-12 h-12 rounded-full object-cover border border-border"
+                          />
+                          <span className="text-xs text-muted-foreground">Preview</span>
+                        </div>
+                      )}
+                    </div>
                     <Input
                       type="number"
                       min="1"

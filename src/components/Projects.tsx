@@ -62,15 +62,15 @@ const Projects = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project) => (
               <Card key={project.id} className="group overflow-hidden border hover:border-primary/30 hover:shadow-medium transition-all duration-300">
-                <div className="relative h-64 overflow-hidden bg-muted">
+                <div className="relative overflow-hidden bg-muted">
                   {project.image_url ? (
                     <img
                       src={project.image_url}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-secondary">
+                    <div className="w-full h-64 flex items-center justify-center bg-secondary">
                       <Folder className="w-16 h-16 text-muted-foreground" />
                     </div>
                   )}
