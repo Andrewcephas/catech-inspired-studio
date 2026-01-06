@@ -31,8 +31,9 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
       className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-background/80 backdrop-blur-sm"
+        scrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
+      style={{ position: 'fixed' }}
     >
       <div className="container mx-auto px-4">
         {/* Pill-shaped header container */}
