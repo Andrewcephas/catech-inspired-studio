@@ -30,10 +30,13 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-      className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
-      style={{ position: 'fixed' }}
+      className="fixed top-0 left-0 right-0 z-[100] py-4 transition-all duration-300"
+      style={{ 
+        position: 'fixed',
+        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        boxShadow: scrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
+      }}
     >
       <div className="container mx-auto px-4">
         {/* Pill-shaped header container */}
@@ -85,14 +88,14 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Contact Button */}
+          {/* Contact Button - styled like View My Portfolio */}
           <a href="#contact">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Button
-                className="hidden md:flex bg-white text-primary hover:bg-white/90 rounded-full px-6 font-medium"
+                className="hidden md:flex bg-accent hover:bg-accent/90 text-primary rounded-full px-6 font-medium shadow-md"
               >
                 Contact Us
               </Button>
@@ -145,7 +148,7 @@ const Navbar = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button className="w-full mt-4 bg-white text-primary hover:bg-white/90 rounded-full">
+                  <Button className="w-full mt-4 bg-accent hover:bg-accent/90 text-primary rounded-full shadow-md">
                     Contact Us
                   </Button>
                 </motion.div>
