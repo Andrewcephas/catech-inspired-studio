@@ -41,7 +41,7 @@ const tools = [
 
 const DesignTools = () => {
   return (
-    <section id="tools" className="py-16 bg-secondary/30">
+    <section id="tools" className="py-16 bg-[hsl(0,0%,94%)]">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
