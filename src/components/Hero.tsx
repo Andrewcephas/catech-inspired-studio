@@ -7,22 +7,21 @@ import officeBg from "@/assets/office-bg.jpg";
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center pt-24 pb-8 overflow-hidden relative">
-      {/* Office Background */}
+      {/* Office Background - More visible */}
       <div 
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `url(${officeBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.15,
         }}
       />
-      <div className="absolute inset-0 bg-background/80 z-0" />
+      <div className="absolute inset-0 bg-background/60 z-0" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center lg:items-center gap-8">
+        <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 lg:gap-4">
           {/* Left Column - Text */}
-          <div className="space-y-6 lg:flex-1">
+          <div className="space-y-5 lg:max-w-[50%]">
             {/* Badge */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -33,17 +32,15 @@ const Hero = () => {
               <p className="text-sm text-foreground font-medium">Creative Solutions</p>
             </motion.div>
 
-            {/* Main Heading - Welcome to on first line, rest on second */}
+            {/* Main Heading - 2 lines with responsive font */}
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight text-foreground"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold leading-tight text-foreground"
             >
-              <span className="block">Welcome to</span>
-              <span className="text-accent">Catech</span>
-              <br />
-              <span>Solutions & Graphics</span>
+              <span className="block">Welcome to Catech</span>
+              <span>Solutions <span className="text-accent">&</span> Graphics</span>
             </motion.h1>
 
             {/* Supporting Text */}
@@ -91,7 +88,7 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Image */}
-          <div className="relative flex justify-center lg:justify-end lg:flex-1">
+          <div className="relative flex justify-center lg:justify-end">
             {/* Decorative Shape Behind */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
