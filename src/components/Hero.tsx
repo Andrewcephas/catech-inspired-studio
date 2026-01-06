@@ -87,14 +87,14 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right Column - Image - Contained within bounds */}
-          <div className="relative flex justify-center lg:justify-end lg:flex-1 w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] overflow-visible">
+          {/* Right Column - Image - Full width matching content */}
+          <div className="relative flex justify-center lg:justify-end lg:flex-1 w-full overflow-visible">
             {/* Decorative Shape Behind */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80"
+              className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px]"
             >
               {/* Outer accent ring with stroke */}
               <div className="absolute inset-0 rounded-full border-[4px] border-accent" />
@@ -116,17 +116,17 @@ const Hero = () => {
               </div>
 
               {/* Corner accent dots */}
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent" />
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent" />
-              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
-              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent" />
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent" />
+              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary" />
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary" />
 
               {/* Floating Labels - Always visible, responsive positioning */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="absolute -top-4 -right-2 sm:-right-6 bg-accent text-primary px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
+                className="absolute -top-6 -right-4 sm:-right-8 bg-accent text-primary px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Web Design
               </motion.div>
@@ -135,7 +135,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className="absolute bottom-16 -left-2 sm:-left-6 bg-primary text-primary-foreground px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
+                className="absolute bottom-20 -left-4 sm:-left-10 bg-primary text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Graphic Design
               </motion.div>
@@ -144,7 +144,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
-                className="absolute -bottom-4 right-4 bg-background border-2 border-primary text-primary px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
+                className="absolute -bottom-6 right-8 bg-background border-2 border-primary text-primary px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Branding
               </motion.div>
@@ -153,7 +153,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.9 }}
-                className="absolute top-1/3 -right-2 sm:-right-8 bg-accent/90 text-primary px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
+                className="absolute top-1/3 -right-4 sm:-right-12 bg-accent/90 text-primary px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 UI/UX
               </motion.div>
@@ -162,7 +162,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.0 }}
-                className="absolute top-1/4 -left-2 sm:-left-6 bg-primary/90 text-primary-foreground px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
+                className="absolute top-1/4 -left-4 sm:-left-10 bg-primary/90 text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Logo Design
               </motion.div>
@@ -171,7 +171,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.1 }}
-                className="absolute -bottom-2 left-2 bg-accent text-primary px-2 py-1 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
+                className="absolute -bottom-4 left-4 bg-accent text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Marketing
               </motion.div>
@@ -181,15 +181,15 @@ const Hero = () => {
                 initial={{ opacity: 0, rotate: -180 }}
                 animate={{ opacity: 1, rotate: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute -top-2 -right-2 w-16 h-16 sm:w-20 sm:h-20 z-20"
+                className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 z-20"
               >
                 <div className="relative w-full h-full">
                   <div className="absolute inset-0 rounded-full border-2 border-primary flex items-center justify-center bg-background">
                     <motion.div 
                       whileHover={{ scale: 1.2, rotate: 90 }}
-                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center cursor-pointer"
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary flex items-center justify-center cursor-pointer"
                     >
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-primary-foreground" />
+                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
                     </motion.div>
                   </div>
                   {/* Rotating Text */}

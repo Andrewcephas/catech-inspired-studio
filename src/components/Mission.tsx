@@ -1,9 +1,85 @@
 import { Target, Eye } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+
+const stats = [
+  { value: 5, suffix: "+", label: "Years Experience" },
+  { value: 500, suffix: "+", label: "Projects Done" },
+  { value: 100, suffix: "+", label: "Happy Clients" },
+  { value: 15, suffix: "+", label: "Team Members" },
+];
+
+const AnimatedCounter = ({ target, suffix }: { target: number; suffix: string }) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const animateCount = () => {
+      const duration = 2000; // 2 seconds to count up
+      const steps = 60;
+      const increment = target / steps;
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          setCount(target);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(current));
+        }
+      }, duration / steps);
+
+      return timer;
+    };
+
+    // Start counting animation
+    const timer = animateCount();
+
+    // Reset and restart every 3 seconds after completion
+    const resetInterval = setInterval(() => {
+      setCount(0);
+      setTimeout(() => {
+        animateCount();
+      }, 100);
+    }, 5000); // 2s for animation + 3s pause
+
+    return () => {
+      clearInterval(timer);
+      clearInterval(resetInterval);
+    };
+  }, [isVisible, target]);
+
+  return (
+    <p ref={ref} className="text-3xl md:text-4xl font-bold text-primary mb-1">
+      {count}{suffix}
+    </p>
+  );
+};
 
 const Mission = () => {
   return (
-    <section id="about" className="py-16 bg-background">
+    <section id="about" className="py-16 bg-[hsl(0,0%,98%)]">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Mission */}
@@ -49,7 +125,7 @@ const Mission = () => {
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section with Animated Counters */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -57,21 +133,16 @@ const Mission = () => {
           viewport={{ once: true }}
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
-          {[
-            { value: "5+", label: "Years Experience" },
-            { value: "500+", label: "Projects Done" },
-            { value: "100+", label: "Happy Clients" },
-            { value: "15+", label: "Team Members" },
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <motion.div 
               key={stat.label}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: 0.1 * index }}
               viewport={{ once: true }}
-              className="text-center"
+              className="text-center p-4 rounded-lg bg-card border border-border"
             >
-              <p className="text-3xl font-bold text-primary mb-1">{stat.value}</p>
+              <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
             </motion.div>
           ))}
