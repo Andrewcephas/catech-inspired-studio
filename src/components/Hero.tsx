@@ -18,8 +18,8 @@ const Hero = () => {
       />
       <div className="absolute inset-0 bg-background/60 z-0" />
       
-      <div className="container mx-auto px-4 relative z-10 overflow-hidden">
-        <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-8 lg:gap-6">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 lg:gap-4">
           {/* Left Column - Text */}
           <div className="space-y-5 lg:flex-1 lg:max-w-[55%]">
             {/* Badge */}
@@ -87,14 +87,14 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right Column - Image - Constrained within container */}
-          <div className="relative flex justify-center lg:justify-end lg:flex-1 w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px]">
+          {/* Right Column - Image - Contained within bounds */}
+          <div className="relative flex justify-center lg:justify-end lg:flex-1 w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] overflow-visible">
             {/* Decorative Shape Behind */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80"
+              className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80"
             >
               {/* Outer accent ring with stroke */}
               <div className="absolute inset-0 rounded-full border-[4px] border-accent" />
@@ -121,12 +121,12 @@ const Hero = () => {
               <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
 
-              {/* Floating Labels - Positioned to stay within bounds */}
+              {/* Floating Labels - Always visible, responsive positioning */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="absolute -top-6 right-0 sm:-right-4 lg:-right-8 bg-accent text-primary px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20"
+                className="absolute -top-4 -right-2 sm:-right-6 bg-accent text-primary px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Web Design
               </motion.div>
@@ -135,7 +135,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className="absolute bottom-12 left-0 sm:-left-4 lg:-left-8 bg-primary text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20"
+                className="absolute bottom-16 -left-2 sm:-left-6 bg-primary text-primary-foreground px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Graphic Design
               </motion.div>
@@ -144,7 +144,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
-                className="absolute -bottom-6 right-8 sm:right-4 bg-background border-2 border-primary text-primary px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20"
+                className="absolute -bottom-4 right-4 bg-background border-2 border-primary text-primary px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Branding
               </motion.div>
@@ -153,7 +153,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.9 }}
-                className="absolute top-1/3 right-0 sm:-right-4 lg:-right-10 bg-accent/90 text-primary px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20"
+                className="absolute top-1/3 -right-2 sm:-right-8 bg-accent/90 text-primary px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 UI/UX
               </motion.div>
@@ -162,7 +162,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.0 }}
-                className="absolute top-1/4 left-0 sm:-left-4 lg:-left-8 bg-primary/90 text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20"
+                className="absolute top-1/4 -left-2 sm:-left-6 bg-primary/90 text-primary-foreground px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Logo Design
               </motion.div>
@@ -171,7 +171,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.1 }}
-                className="absolute -bottom-4 left-4 sm:left-0 bg-accent text-primary px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold shadow-lg z-20"
+                className="absolute -bottom-2 left-2 bg-accent text-primary px-2 py-1 rounded-full text-[10px] sm:text-xs font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Marketing
               </motion.div>
