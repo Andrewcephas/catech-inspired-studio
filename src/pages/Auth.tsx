@@ -31,7 +31,9 @@ const Auth = () => {
           .eq("user_id", userId);
         
         if (error) {
-          console.error("Error checking roles:", error);
+          if (import.meta.env.DEV) {
+            console.error("Error checking roles:", error);
+          }
           toast({
             title: "Error",
             description: "Failed to verify admin access",
@@ -55,7 +57,9 @@ const Auth = () => {
           await supabase.auth.signOut();
         }
       } catch (err) {
-        console.error("Admin check error:", err);
+        if (import.meta.env.DEV) {
+          console.error("Admin check error:", err);
+        }
       }
     };
 
