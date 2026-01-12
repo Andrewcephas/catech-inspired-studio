@@ -97,43 +97,46 @@ const Contact = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <Card className="border hover:border-primary/30 transition-colors duration-300">
-              <CardContent className="p-5 flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-                  <Phone className="text-primary-foreground" size={20} />
+            <Card className="group relative overflow-hidden border-0 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-12px_rgba(0,112,32,0.15)] transition-all duration-500 hover:-translate-y-1">
+              <CardContent className="p-6 flex items-start gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Phone className="text-primary-foreground" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base mb-1">Phone / WhatsApp</h3>
-                  <p className="text-sm text-muted-foreground">0793 614 592</p>
-                  <p className="text-xs text-muted-foreground">Available Mon-Fri, 8AM-6PM</p>
+                  <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Phone / WhatsApp</h3>
+                  <p className="text-base text-foreground font-medium">0793 614 592</p>
+                  <p className="text-xs text-muted-foreground mt-1">Available Mon-Fri, 8AM-6PM</p>
                 </div>
               </CardContent>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-500" />
             </Card>
 
-            <Card className="border hover:border-primary/30 transition-colors duration-300">
-              <CardContent className="p-5 flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-                  <Mail className="text-accent-foreground" size={20} />
+            <Card className="group relative overflow-hidden border-0 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-12px_rgba(255,153,0,0.15)] transition-all duration-500 hover:-translate-y-1">
+              <CardContent className="p-6 flex items-start gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Mail className="text-accent-foreground" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base mb-1">Email</h3>
-                  <p className="text-sm text-muted-foreground">catechsolutionsgraphics@gmail.com</p>
-                  <p className="text-xs text-muted-foreground">We'll respond within 24 hours</p>
+                  <h3 className="font-bold text-lg mb-1 group-hover:text-accent transition-colors">Email</h3>
+                  <p className="text-base text-foreground font-medium">catechsolutionsgraphics@gmail.com</p>
+                  <p className="text-xs text-muted-foreground mt-1">We'll respond within 24 hours</p>
                 </div>
               </CardContent>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-accent group-hover:w-full transition-all duration-500" />
             </Card>
 
-            <Card className="border hover:border-primary/30 transition-colors duration-300">
-              <CardContent className="p-5 flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-                  <MapPin className="text-primary-foreground" size={20} />
+            <Card className="group relative overflow-hidden border-0 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-12px_rgba(0,112,32,0.15)] transition-all duration-500 hover:-translate-y-1">
+              <CardContent className="p-6 flex items-start gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <MapPin className="text-primary-foreground" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base mb-1">Location</h3>
-                  <p className="text-sm text-muted-foreground">Nairobi, Kenya</p>
-                  <p className="text-xs text-muted-foreground">Serving clients globally</p>
+                  <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Location</h3>
+                  <p className="text-base text-foreground font-medium">Nairobi, Kenya</p>
+                  <p className="text-xs text-muted-foreground mt-1">Serving clients globally</p>
                 </div>
               </CardContent>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-500" />
             </Card>
           </motion.div>
 
@@ -144,8 +147,10 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Card className="border shadow-medium">
-              <CardContent className="p-6">
+            <Card className="relative overflow-hidden border-0 shadow-[0_8px_30px_-4px_rgba(0,0,0,0.15)]">
+              {/* Top accent gradient */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+              <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-1.5">

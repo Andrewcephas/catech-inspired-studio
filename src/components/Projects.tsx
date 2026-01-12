@@ -75,25 +75,28 @@ const Projects = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="group overflow-hidden border hover:border-primary/30 hover:shadow-medium transition-all duration-300">
+                <Card className="group relative overflow-hidden border-0 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] hover:shadow-[0_25px_50px_-12px_rgba(0,112,32,0.2)] transition-all duration-500 hover:-translate-y-2">
                   <div className="relative overflow-hidden bg-muted">
                     {project.image_url ? (
                       <img
                         src={project.image_url}
                         alt={project.title}
-                        className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-auto object-contain group-hover:scale-110 transition-transform duration-700 ease-out"
                       />
                     ) : (
-                      <div className="w-full h-64 flex items-center justify-center bg-secondary">
-                        <Folder className="w-16 h-16 text-muted-foreground" />
+                      <div className="w-full h-64 flex items-center justify-center bg-gradient-to-br from-secondary to-muted">
+                        <Folder className="w-20 h-20 text-muted-foreground/50" />
                       </div>
                     )}
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
                     {project.tags && project.tags.length > 0 && (
-                      <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
+                      <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 z-10">
                         {project.tags.slice(0, 3).map((tag, tagIndex) => (
                           <Badge 
                             key={tagIndex} 
-                            className={tagIndex % 2 === 0 ? "bg-primary text-primary-foreground" : "bg-accent text-foreground"}
+                            className={`backdrop-blur-sm shadow-lg ${tagIndex % 2 === 0 ? "bg-primary/90 text-primary-foreground" : "bg-accent/90 text-foreground"}`}
                           >
                             {tag}
                           </Badge>
@@ -101,15 +104,26 @@ const Projects = () => {
                       </div>
                     )}
                   </div>
-                  <CardContent className="p-5">
-                    <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-2">
+                  <CardContent className="p-6 relative">
+                    {/* Category badge */}
+                    {project.category && (
+                      <span className="absolute -top-3 right-6 px-3 py-1 bg-accent text-xs font-semibold text-foreground rounded-full shadow-lg">
+                        {project.category}
+                      </span>
+                    )}
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors mb-2 mt-2">
                       {project.title}
                     </h3>
                     {project.description && (
-                      <p className="text-sm text-muted-foreground line-clamp-2">
+                      <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                         {project.description}
                       </p>
                     )}
+                    
+                    {/* Arrow indicator */}
+                    <div className="mt-4 flex items-center text-primary font-medium text-sm opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300">
+                      View Project <ArrowRight className="ml-2 w-4 h-4" />
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>

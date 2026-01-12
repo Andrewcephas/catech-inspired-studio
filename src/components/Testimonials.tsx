@@ -77,41 +77,52 @@ const Testimonials = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="group border hover:border-accent/30 hover:shadow-medium transition-all duration-300 h-full">
-                  <CardContent className="p-6">
-                    <Quote className="w-8 h-8 text-accent mb-4" />
-                    <p className="text-card-foreground text-sm leading-relaxed mb-6">
+                <Card className="group relative overflow-hidden border-0 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-12px_rgba(255,153,0,0.2)] transition-all duration-500 h-full hover:-translate-y-1">
+                  {/* Decorative quote background */}
+                  <div className="absolute -top-4 -right-4 w-24 h-24 text-accent/10 transform rotate-12">
+                    <Quote className="w-full h-full" />
+                  </div>
+                  
+                  <CardContent className="p-8 relative z-10">
+                    {/* Rating stars at top */}
+                    {testimonial.rating && (
+                      <div className="flex gap-1 mb-4">
+                        {Array.from({ length: testimonial.rating }).map((_, i) => (
+                          <Star key={i} className="w-5 h-5 text-accent fill-accent drop-shadow-sm" />
+                        ))}
+                      </div>
+                    )}
+                    
+                    <p className="text-card-foreground text-base leading-relaxed mb-8 italic">
                       "{testimonial.content}"
                     </p>
-                    <div className="flex items-center gap-3">
+                    
+                    {/* Author section with left border accent */}
+                    <div className="flex items-center gap-4 pt-6 border-t border-border/50">
                       {testimonial.avatar_url ? (
                         <img
                           src={testimonial.avatar_url}
                           alt={testimonial.name}
-                          className="w-12 h-12 rounded-full object-cover"
+                          className="w-14 h-14 rounded-full object-cover ring-2 ring-accent/20 ring-offset-2"
                         />
                       ) : (
-                        <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                          <span className="text-primary-foreground font-bold text-lg">
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center ring-2 ring-primary/20 ring-offset-2 shadow-lg">
+                          <span className="text-primary-foreground font-bold text-xl">
                             {testimonial.name.charAt(0)}
                           </span>
                         </div>
                       )}
                       <div>
-                        <p className="font-bold text-foreground text-sm">{testimonial.name}</p>
-                        <p className="text-muted-foreground text-xs">
-                          {testimonial.role}{testimonial.company && `, ${testimonial.company}`}
+                        <p className="font-bold text-foreground text-base">{testimonial.name}</p>
+                        <p className="text-muted-foreground text-sm">
+                          {testimonial.role}{testimonial.company && ` • ${testimonial.company}`}
                         </p>
                       </div>
                     </div>
-                    {testimonial.rating && (
-                      <div className="flex gap-1 mt-4">
-                        {Array.from({ length: testimonial.rating }).map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-accent fill-accent" />
-                        ))}
-                      </div>
-                    )}
                   </CardContent>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </Card>
               </motion.div>
             ))}
