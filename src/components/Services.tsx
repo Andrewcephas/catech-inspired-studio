@@ -80,20 +80,27 @@ const Services = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card 
-                  className={`group transition-all duration-500 border ${
+              <Card 
+                  className={`group relative overflow-hidden transition-all duration-500 border-0 ${
                     isActive 
-                      ? 'shadow-lg border-accent scale-[1.02] bg-accent/5' 
-                      : 'hover:shadow-medium hover:border-primary/30'
+                      ? 'shadow-[0_20px_50px_-12px_rgba(0,112,32,0.25)] scale-[1.02]' 
+                      : 'shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_40px_-12px_rgba(0,112,32,0.15)] hover:scale-[1.01]'
                   }`}
                 >
-                  <CardContent className="p-6">
-                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-all duration-500 ${
-                      isActive ? 'bg-accent scale-110' : 'bg-primary group-hover:scale-105'
+                  {/* Top accent bar */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 transition-all duration-500 ${
+                    isActive ? 'bg-accent' : 'bg-primary/20 group-hover:bg-primary'
+                  }`} />
+                  
+                  <CardContent className="p-8 pt-10">
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 shadow-lg ${
+                      isActive 
+                        ? 'bg-gradient-to-br from-accent to-accent/80 scale-110 rotate-3' 
+                        : 'bg-gradient-to-br from-primary to-primary/80 group-hover:scale-110 group-hover:rotate-3'
                     }`}>
-                      <Icon className={`${isActive ? 'text-primary' : 'text-primary-foreground'}`} size={24} />
+                      <Icon className="text-primary-foreground" size={28} />
                     </div>
-                    <h3 className={`text-lg font-bold mb-2 transition-colors duration-300 ${
+                    <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${
                       isActive ? 'text-accent' : 'text-foreground group-hover:text-primary'
                     }`}>
                       {service.title}
@@ -101,6 +108,11 @@ const Services = () => {
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {service.description}
                     </p>
+                    
+                    {/* Bottom decorative element */}
+                    <div className={`absolute bottom-0 right-0 w-24 h-24 rounded-tl-full transition-all duration-500 ${
+                      isActive ? 'bg-accent/10' : 'bg-primary/5 group-hover:bg-primary/10'
+                    }`} />
                   </CardContent>
                 </Card>
               </motion.div>

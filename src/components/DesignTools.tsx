@@ -71,55 +71,66 @@ const DesignTools = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border hover:border-primary/30 hover:shadow-medium transition-all duration-300"
+                className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl bg-background shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-12px_rgba(0,112,32,0.15)] transition-all duration-500 border-0 overflow-hidden hover:-translate-y-2"
               >
+                {/* Background glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
                 {/* Circular Progress with Logo */}
-                <div className="relative w-24 h-24">
-                  <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                <div className="relative w-28 h-28 z-10">
+                  <svg className="w-full h-full -rotate-90 drop-shadow-lg" viewBox="0 0 100 100">
                     {/* Background circle */}
                     <circle
                       cx="50"
                       cy="50"
                       r="40"
                       stroke="currentColor"
-                      strokeWidth="8"
+                      strokeWidth="6"
                       fill="none"
-                      className="text-muted/30"
+                      className="text-muted/20"
                     />
                     {/* Progress circle */}
                     <circle
                       cx="50"
                       cy="50"
                       r="40"
-                      stroke="currentColor"
-                      strokeWidth="8"
+                      stroke="url(#gradient)"
+                      strokeWidth="6"
                       fill="none"
                       strokeLinecap="round"
-                      className="text-accent"
                       style={{
                         strokeDasharray: circumference,
                         strokeDashoffset: strokeDashoffset,
                         transition: 'stroke-dashoffset 1s ease-in-out',
                       }}
                     />
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(var(--primary))" />
+                        <stop offset="100%" stopColor="hsl(var(--accent))" />
+                      </linearGradient>
+                    </defs>
                   </svg>
                   {/* Logo in center */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className={`w-12 h-12 rounded-full ${tool.color} flex items-center justify-center p-2`}>
+                    <div className={`w-14 h-14 rounded-xl ${tool.color} flex items-center justify-center p-2.5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <img 
                         src={tool.logo} 
                         alt={tool.name} 
-                        className="w-8 h-8 object-contain"
+                        className="w-9 h-9 object-contain"
                       />
                     </div>
                   </div>
                 </div>
                 
                 {/* Percentage */}
-                <span className="text-lg font-bold text-foreground">{tool.percentage}%</span>
+                <span className="text-2xl font-bold text-foreground z-10">{tool.percentage}%</span>
                 
                 {/* Tool name */}
-                <span className="text-sm font-medium text-muted-foreground">{tool.name}</span>
+                <span className="text-sm font-semibold text-muted-foreground tracking-wide z-10">{tool.name}</span>
+                
+                {/* Bottom decorative line */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-500" />
               </motion.div>
             );
           })}
