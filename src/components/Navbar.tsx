@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,15 +7,6 @@ import catechLogo from "@/assets/catech-logo.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -38,9 +29,7 @@ const Navbar = () => {
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.3, delay: 0.2 }}
-          className={`bg-primary rounded-full px-6 py-3 flex items-center justify-between transition-all duration-300 ${
-            scrolled ? "shadow-lg" : ""
-          }`}
+          className="bg-primary rounded-full px-6 py-3 flex items-center justify-between shadow-lg"
         >
           {/* Logo */}
           <motion.a 
