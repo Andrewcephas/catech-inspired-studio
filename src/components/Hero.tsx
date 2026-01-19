@@ -6,10 +6,12 @@ import officeBg from "@/assets/office-bg.jpg";
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center pt-24 pb-8 relative">
-      {/* Office Background - More visible */}
-      <div 
-        className="absolute inset-0 z-0"
+    <section id="home" className="min-h-screen flex items-center pt-24 pb-8 relative overflow-hidden">
+      {/* Office Background - Rotating clockwise */}
+      <motion.div 
+        className="absolute inset-[-20%] z-0"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
         style={{
           backgroundImage: `url(${officeBg})`,
           backgroundSize: 'cover',
