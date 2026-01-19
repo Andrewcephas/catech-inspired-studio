@@ -1,25 +1,11 @@
-import { Play, ArrowRight } from "lucide-react";
+import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import heroPerson from "@/assets/hero-person.png";
-import officeBg from "@/assets/office-bg.jpg";
 
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center pt-24 pb-8 relative overflow-hidden">
-      {/* Office Background - Rotating clockwise */}
-      <motion.div 
-        className="absolute inset-[-20%] z-0"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-        style={{
-          backgroundImage: `url(${officeBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <div className="absolute inset-0 bg-background/60 z-0" />
-      
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 lg:gap-4">
           {/* Left Column - Text */}
@@ -117,6 +103,36 @@ const Hero = () => {
                 />
               </div>
 
+              {/* Rotating Text Badge - Inside circle on left side */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-8 w-16 h-16 sm:w-20 sm:h-20 z-20"
+              >
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-0 rounded-full border-2 border-accent flex items-center justify-center bg-primary/90 backdrop-blur-sm">
+                    <motion.div 
+                      whileHover={{ scale: 1.2 }}
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-accent flex items-center justify-center cursor-pointer"
+                    >
+                      <span className="text-primary font-bold text-xs sm:text-sm">CG</span>
+                    </motion.div>
+                  </div>
+                  {/* Rotating Text */}
+                  <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
+                    <defs>
+                      <path id="circle" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+                    </defs>
+                    <text className="text-[9px] sm:text-[10px] fill-accent font-semibold uppercase tracking-widest">
+                      <textPath href="#circle">
+                        • Catech • Solutions • Graphics 
+                      </textPath>
+                    </text>
+                  </svg>
+                </div>
+              </motion.div>
+
               {/* Corner accent dots */}
               <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent" />
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent" />
@@ -176,36 +192,6 @@ const Hero = () => {
                 className="absolute -bottom-4 left-4 bg-accent text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-lg z-20 whitespace-nowrap"
               >
                 Marketing
-              </motion.div>
-
-              {/* Rotating Badge */}
-              <motion.div 
-                initial={{ opacity: 0, rotate: -180 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 z-20"
-              >
-                <div className="relative w-full h-full">
-                  <div className="absolute inset-0 rounded-full border-2 border-primary flex items-center justify-center bg-background">
-                    <motion.div 
-                      whileHover={{ scale: 1.2, rotate: 90 }}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary flex items-center justify-center cursor-pointer"
-                    >
-                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
-                    </motion.div>
-                  </div>
-                  {/* Rotating Text */}
-                  <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
-                    <defs>
-                      <path id="circle" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
-                    </defs>
-                    <text className="text-[10px] fill-primary font-semibold uppercase tracking-widest">
-                      <textPath href="#circle">
-                        • Catech • Solutions • Graphics 
-                      </textPath>
-                    </text>
-                  </svg>
-                </div>
               </motion.div>
             </motion.div>
           </div>
