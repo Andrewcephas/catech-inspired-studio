@@ -30,13 +30,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-      className="fixed top-0 left-0 right-0 z-[100] py-4 transition-all duration-300"
-      style={{ 
-        position: 'fixed',
-        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        boxShadow: scrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
-      }}
+      className="fixed top-0 left-0 right-0 z-[100] py-4"
     >
       <div className="container mx-auto px-4">
         {/* Pill-shaped header container */}
