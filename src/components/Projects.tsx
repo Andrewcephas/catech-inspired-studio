@@ -47,10 +47,12 @@ const Projects = () => {
               My Latest <span className="text-accent">Projects</span>
             </h2>
           </div>
-          <Button variant="outline" className="mt-4 md:mt-0 rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            View All Projects
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
+          <a href="#contact">
+            <Button variant="outline" className="mt-4 md:mt-0 rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              View All Projects
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </a>
         </motion.div>
 
         {isLoading ? (
