@@ -103,28 +103,26 @@ const Hero = () => {
                 />
               </div>
 
-              {/* Rotating Text Badge - Inside circle on left side */}
+              {/* Rotating Text Badge - Top right side */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-8 w-16 h-16 sm:w-20 sm:h-20 z-20"
+                className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 z-20"
               >
                 <div className="relative w-full h-full">
-                  <div className="absolute inset-0 rounded-full border-2 border-accent flex items-center justify-center bg-primary/90 backdrop-blur-sm">
+                  <div className="absolute inset-0 rounded-full border-2 border-[#ff9900] flex items-center justify-center bg-white backdrop-blur-sm">
                     <motion.div 
                       whileHover={{ scale: 1.2 }}
-                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-accent flex items-center justify-center cursor-pointer"
-                    >
-                      <span className="text-primary font-bold text-xs sm:text-sm">CG</span>
-                    </motion.div>
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ff9900] cursor-pointer"
+                    />
                   </div>
                   {/* Rotating Text */}
                   <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
                     <defs>
                       <path id="circle" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
                     </defs>
-                    <text className="text-[9px] sm:text-[10px] fill-accent font-semibold uppercase tracking-widest">
+                    <text className="text-[9px] sm:text-[10px] fill-black font-semibold uppercase tracking-widest">
                       <textPath href="#circle">
                         • Catech • Solutions • Graphics 
                       </textPath>
