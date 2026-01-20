@@ -10,40 +10,36 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const words = ["Your", "Tech", "Partner", "For", "Success"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
-  const audioContextRef = useRef<AudioContext | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Create typing sound using Web Audio API
-  const playTypingSound = () => {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-    }
+  useEffect(() => {
+    // Create keyboard typing sound - mechanical keyboard sound
+    audioRef.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
+    audioRef.current.volume = 0.3;
+    audioRef.current.loop = true;
     
-    const ctx = audioContextRef.current;
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
-    
-    oscillator.frequency.value = 800 + Math.random() * 200;
-    oscillator.type = 'square';
-    
-    // Medium volume
-    gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
-    
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.05);
-  };
+    // Start playing typing sound
+    audioRef.current.play().catch(() => {});
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (currentWordIndex < words.length) {
-      playTypingSound();
       const timer = setTimeout(() => {
         setCurrentWordIndex(prev => prev + 1);
       }, 200); // Fast typing speed
       return () => clearTimeout(timer);
     } else {
+      // Stop typing sound
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
       // All words typed, wait a moment then complete
       const completeTimer = setTimeout(() => {
         setIsComplete(true);
@@ -60,7 +56,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-gradient-to-br from-primary via-primary to-[#017020]"
+          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-white"
         >
           {/* Logo */}
           <motion.div
@@ -84,7 +80,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.15 }}
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black"
               >
                 {word}
               </motion.span>
@@ -93,7 +89,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.5, repeat: Infinity }}
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-accent"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary"
               >
                 |
               </motion.span>
@@ -112,7 +108,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                 key={i}
                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.2 }}
-                className="w-2 h-2 rounded-full bg-accent"
+                className="w-2 h-2 rounded-full bg-primary"
               />
             ))}
           </motion.div>

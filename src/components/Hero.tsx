@@ -2,22 +2,12 @@ import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import heroPerson from "@/assets/hero-person.png";
-import officeBg from "@/assets/office-bg.jpg";
 
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center pt-24 pb-8 relative overflow-hidden">
-      {/* Hero Background with Laptop Image */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${officeBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        {/* Dark overlay to ensure text readability */}
+      {/* Text readability overlay - no local background, uses global rotating bg */}
+      <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-background/70" />
       </div>
       <div className="container mx-auto px-4 relative z-10">

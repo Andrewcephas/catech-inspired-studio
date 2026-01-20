@@ -16,6 +16,7 @@ import officeBg from "@/assets/office-bg.jpg";
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
+  
   // Smooth scroll for navigation links
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -44,22 +45,35 @@ const Index = () => {
   return (
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      
+      {/* Fixed Navbar - Always on top */}
+      <Navbar />
+      
+      {/* Fixed WhatsApp Button - Always on top */}
+      <WhatsAppButton />
+      
       <div className="min-h-screen bg-background overflow-x-hidden relative">
-        {/* Global Fixed Background */}
-        <div 
-          className="fixed inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `url(${officeBg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-          }}
-        >
-          <div className="absolute inset-0 bg-background/60" />
+        {/* 3D Rotating Background */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ perspective: "1000px" }}>
+          <motion.div
+            animate={{ rotateY: 360 }}
+            transition={{
+              duration: 60,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute inset-[-50%] w-[200%] h-[200%]"
+            style={{
+              backgroundImage: `url(${officeBg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              transformStyle: "preserve-3d",
+            }}
+          />
+          <div className="absolute inset-0 bg-background/70" />
         </div>
         
-        <Navbar />
         <main className="overflow-x-hidden relative z-10">
           <Hero />
           <ServiceStrip />
@@ -71,7 +85,6 @@ const Index = () => {
           <Contact />
         </main>
         <Footer />
-        <WhatsAppButton />
       </div>
     </>
   );
