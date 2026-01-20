@@ -48,7 +48,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-wrap items-center gap-4"
             >
-              <a href="#projects">
+              <a href="#contact">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
                     size="lg"
@@ -103,26 +103,23 @@ const Hero = () => {
                 />
               </div>
 
-              {/* Rotating Text Badge - Top right side */}
+              {/* Rotating Text Badge - Inside circle at top-right */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 z-20"
+                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 z-20"
               >
                 <div className="relative w-full h-full">
                   <div className="absolute inset-0 rounded-full border-2 border-[#ff9900] flex items-center justify-center bg-white backdrop-blur-sm">
-                    <motion.div 
-                      whileHover={{ scale: 1.2 }}
-                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ff9900] cursor-pointer"
-                    />
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#ff9900]" />
                   </div>
                   {/* Rotating Text */}
                   <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
                     <defs>
                       <path id="circle" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
                     </defs>
-                    <text className="text-[9px] sm:text-[10px] fill-black font-semibold uppercase tracking-widest">
+                    <text className="text-[8px] sm:text-[9px] fill-black font-semibold uppercase tracking-widest">
                       <textPath href="#circle">
                         • Catech • Solutions • Graphics 
                       </textPath>
